@@ -1,0 +1,460 @@
+====================================================================================================
+TIVF5 Model Comparison Summary Report
+Generated: 2026-03-22T08:37:47.982
+====================================================================================================
+
+Mechanism Key:
+  BI = IFN blocks infection (k_IF)
+  BP = IFN blocks viral production (k_PV)
+  IC = IFN increases viral clearance (delta_FV)
+  PF = IFN positive feedback (a_F)
+
+Null settings: k_IF=∞, k_PV=∞, delta_FV=0, a_F=0
+
+Ranking by NLL (best to worst):
+----------------------------------------------------------------------------------------------------
+Rank  Model   nCal  BI   BP   IC   PF             NLL   Improvement   Time(s)
+----------------------------------------------------------------------------------------------------
+   1  M16       15  ✓    ✓    ✓    ✓       2.5875e+01        79.30%    1326.8
+   2  M15       14  ·    ✓    ✓    ✓       2.6026e+01        85.10%    1519.3
+   3  M12       14  ✓    ✓    ·    ✓       2.7108e+01        78.00%    1276.9
+   4  M13       13  ·    ·    ✓    ✓       3.6049e+01        86.17%    1919.3
+   5  M09       12  ·    ·    ·    ✓       3.6776e+01        86.62%    1926.3
+   6  M10       13  ✓    ·    ·    ✓       3.7958e+01        79.97%    1658.0
+   7  M11       13  ·    ✓    ·    ✓       3.9289e+01        77.23%    1465.7
+   8  M14       14  ✓    ·    ✓    ✓       3.9331e+01        78.05%    1843.2
+   9  M08       14  ✓    ✓    ✓    ·       4.0322e+01        85.73%    1652.7
+  10  M04       13  ✓    ✓    ·    ·       4.0322e+01        85.73%    1359.1
+  11  M07       13  ·    ✓    ✓    ·       4.0436e+01        85.58%    1532.1
+  12  M03       12  ·    ✓    ·    ·       4.0437e+01        85.58%    1557.1
+  13  M06       13  ✓    ·    ✓    ·       4.0808e+01        85.87%    1464.6
+  14  M02       12  ✓    ·    ·    ·       4.0808e+01        85.87%    1170.6
+  15  M05       12  ·    ·    ✓    ·       4.1539e+01        85.36%    1020.1
+  16  M01       11  ·    ·    ·    ·       4.1548e+01        85.36%    1713.6
+----------------------------------------------------------------------------------------------------
+
+
+Model Comparison (in model order):
+----------------------------------------------------------------------------------------------------
+Model   BI   BP   IC   PF             NLL  Description                             
+----------------------------------------------------------------------------------------------------
+M01     ·    ·    ·    ·       4.1548e+01  Null model (no IFN mechanisms)          
+M02     ✓    ·    ·    ·       4.0808e+01  IFN: blocks infection                   
+M03     ·    ✓    ·    ·       4.0437e+01  IFN: blocks production                  
+M04     ✓    ✓    ·    ·       4.0322e+01  IFN: blocks infection, blocks produ...  
+M05     ·    ·    ✓    ·       4.1539e+01  IFN: increases clearance                
+M06     ✓    ·    ✓    ·       4.0808e+01  IFN: blocks infection, increases cl...  
+M07     ·    ✓    ✓    ·       4.0436e+01  IFN: blocks production, increases c...  
+M08     ✓    ✓    ✓    ·       4.0322e+01  IFN: blocks infection, blocks produ...  
+M09     ·    ·    ·    ✓       3.6776e+01  IFN: positive feedback                  
+M10     ✓    ·    ·    ✓       3.7958e+01  IFN: blocks infection, positive fee...  
+M11     ·    ✓    ·    ✓       3.9289e+01  IFN: blocks production, positive fe...  
+M12     ✓    ✓    ·    ✓       2.7108e+01  IFN: blocks infection, blocks produ...  
+M13     ·    ·    ✓    ✓       3.6049e+01  IFN: increases clearance, positive ...  
+M14     ✓    ·    ✓    ✓       3.9331e+01  IFN: blocks infection, increases cl...  
+M15     ·    ✓    ✓    ✓       2.6026e+01  IFN: blocks production, increases c...  
+M16     ✓    ✓    ✓    ✓       2.5875e+01  Full model (all IFN mechanisms)         
+----------------------------------------------------------------------------------------------------
+
+
+All configurations - Best parameters (ranked by NLL):
+====================================================================================================
+
+#1: M16
+Description: Full model (all IFN mechanisms)
+Calibrated parameters: 15 / 15
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=9.204329e-02,
+    k_E=3.551037e+00,
+    delta_I=1.579774e+00,
+    k_IF=3.518128e-01,
+    p_V=2.033484e+01,
+    c_V=2.584842e-01,
+    D_V=1.000000e-04,
+    k_PV=5.475320e+00,
+    p_F=2.780158e-01,
+    c_F=1.019118e-03,
+    D_F=1.000000e-02,
+    a_F=2.646875e+02,
+    K_F=7.841301e+01,
+    delta_FV=9.992351e-03,
+    k_FV=1.937645e+02,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#2: M15
+Description: IFN: blocks production, increases clearance, positive feedback
+Calibrated parameters: 14 / 15
+Fixed (null): k_IF=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=3.177313e+00,
+    delta_I=4.147009e+00,
+    k_IF=1.000000e+12,
+    p_V=2.928123e+01,
+    c_V=1.000000e-01,
+    D_V=1.000000e-06,
+    k_PV=6.659183e+00,
+    p_F=6.066115e-02,
+    c_F=1.000000e-03,
+    D_F=9.463308e-01,
+    a_F=9.872138e+03,
+    K_F=1.963406e+01,
+    delta_FV=3.506720e-03,
+    k_FV=9.389691e+02,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#3: M12
+Description: IFN: blocks infection, blocks production, positive feedback
+Calibrated parameters: 14 / 15
+Fixed (null): delta_FV=0
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.016462e-02,
+    k_E=3.177313e+00,
+    delta_I=1.987088e+00,
+    k_IF=2.956636e-01,
+    p_V=4.751589e+01,
+    c_V=2.668363e+00,
+    D_V=2.219538e-05,
+    k_PV=9.999622e+00,
+    p_F=2.528119e-01,
+    c_F=1.026593e-03,
+    D_F=1.000000e+00,
+    a_F=1.803932e+03,
+    K_F=9.983245e+01,
+    delta_FV=1.000000e-12,
+    k_FV=9.142549e+02,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#4: M13
+Description: IFN: increases clearance, positive feedback
+Calibrated parameters: 13 / 15
+Fixed (null): k_IF=∞, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.035702e+00,
+    delta_I=3.118113e+00,
+    k_IF=1.000000e+12,
+    p_V=4.346385e+01,
+    c_V=5.179902e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=1.208861e-02,
+    c_F=1.000000e-01,
+    D_F=1.004624e-02,
+    a_F=3.133860e+03,
+    K_F=1.256443e+01,
+    delta_FV=8.557412e-03,
+    k_FV=5.996050e+02,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#5: M09
+Description: IFN: positive feedback
+Calibrated parameters: 12 / 15
+Fixed (null): k_IF=∞, delta_FV=0, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=9.204833e-02,
+    k_E=4.708361e+00,
+    delta_I=7.080964e+00,
+    k_IF=1.000000e+12,
+    p_V=3.920576e+01,
+    c_V=2.543747e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=1.245088e-02,
+    c_F=1.000000e-01,
+    D_F=2.410041e-02,
+    a_F=5.283624e+03,
+    K_F=8.285851e+00,
+    delta_FV=1.000000e-12,
+    k_FV=1.000000e+03,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#6: M10
+Description: IFN: blocks infection, positive feedback
+Calibrated parameters: 13 / 15
+Fixed (null): delta_FV=0, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.034263e+00,
+    delta_I=7.812147e+00,
+    k_IF=1.999755e+01,
+    p_V=6.107060e+01,
+    c_V=3.632964e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=3.217200e-03,
+    c_F=3.235607e-03,
+    D_F=3.374657e-01,
+    a_F=1.402606e+03,
+    K_F=1.000000e+00,
+    delta_FV=1.000000e-12,
+    k_FV=1.036472e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#7: M11
+Description: IFN: blocks production, positive feedback
+Calibrated parameters: 13 / 15
+Fixed (null): k_IF=∞, delta_FV=0
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=4.541912e+00,
+    delta_I=3.618731e+00,
+    k_IF=1.000000e+12,
+    p_V=3.916007e+01,
+    c_V=3.192882e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+01,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=1.000000e+00,
+    a_F=1.000000e+02,
+    K_F=5.947443e+01,
+    delta_FV=1.000000e-12,
+    k_FV=5.025202e+02,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#8: M14
+Description: IFN: blocks infection, increases clearance, positive feedback
+Calibrated parameters: 14 / 15
+Fixed (null): k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.035702e+00,
+    delta_I=4.638334e+00,
+    k_IF=2.000000e+01,
+    p_V=1.000000e+02,
+    c_V=1.000000e+01,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=6.086388e-03,
+    c_F=1.000000e-03,
+    D_F=4.549528e-01,
+    a_F=3.292666e+02,
+    K_F=1.003609e+00,
+    delta_FV=1.000000e-02,
+    k_FV=3.917815e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#9: M08
+Description: IFN: blocks infection, blocks production, increases clearance
+Calibrated parameters: 14 / 15
+Fixed (null): a_F=0
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.035702e+00,
+    delta_I=3.464996e+00,
+    k_IF=2.000000e+01,
+    p_V=4.046815e+01,
+    c_V=3.741753e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+01,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=9.999220e-01,
+    a_F=1.000000e-12,
+    K_F=1.000000e+00,
+    delta_FV=1.000000e-04,
+    k_FV=1.000000e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#10: M04
+Description: IFN: blocks infection, blocks production
+Calibrated parameters: 13 / 15
+Fixed (null): a_F=0, delta_FV=0
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.035702e+00,
+    delta_I=3.464746e+00,
+    k_IF=2.000000e+01,
+    p_V=4.038490e+01,
+    c_V=3.730212e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+01,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=9.958344e-01,
+    a_F=1.000000e-12,
+    K_F=2.638409e+00,
+    delta_FV=1.000000e-12,
+    k_FV=1.787343e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#11: M07
+Description: IFN: blocks production, increases clearance
+Calibrated parameters: 13 / 15
+Fixed (null): k_IF=∞, a_F=0
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.035698e+00,
+    delta_I=3.108181e+00,
+    k_IF=1.000000e+12,
+    p_V=4.160844e+01,
+    c_V=3.900395e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+01,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=1.000000e-02,
+    a_F=1.000000e-12,
+    K_F=9.153772e+01,
+    delta_FV=1.000000e-02,
+    k_FV=1.000000e+03,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#12: M03
+Description: IFN: blocks production
+Calibrated parameters: 12 / 15
+Fixed (null): k_IF=∞, a_F=0, delta_FV=0
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=5.035702e+00,
+    delta_I=3.110536e+00,
+    k_IF=1.000000e+12,
+    p_V=4.155908e+01,
+    c_V=3.893613e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+01,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=1.000000e-02,
+    a_F=1.000000e-12,
+    K_F=9.592777e+01,
+    delta_FV=1.000000e-12,
+    k_FV=1.000000e+03,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#13: M06
+Description: IFN: blocks infection, increases clearance
+Calibrated parameters: 13 / 15
+Fixed (null): a_F=0, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=9.513030e-02,
+    k_E=5.035702e+00,
+    delta_I=2.920992e+00,
+    k_IF=2.000000e+01,
+    p_V=4.055949e+01,
+    c_V=5.466743e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=1.000000e-02,
+    a_F=1.000000e-12,
+    K_F=8.134810e+01,
+    delta_FV=1.000000e-04,
+    k_FV=1.000000e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#14: M02
+Description: IFN: blocks infection
+Calibrated parameters: 12 / 15
+Fixed (null): a_F=0, delta_FV=0, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=9.490717e-02,
+    k_E=5.035702e+00,
+    delta_I=2.923697e+00,
+    k_IF=2.000000e+01,
+    p_V=4.066882e+01,
+    c_V=5.475257e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=1.000000e-02,
+    a_F=1.000000e-12,
+    K_F=2.536338e+01,
+    delta_FV=1.000000e-12,
+    k_FV=2.714775e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#15: M05
+Description: IFN: increases clearance
+Calibrated parameters: 12 / 15
+Fixed (null): k_IF=∞, a_F=0, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=4.027905e+00,
+    delta_I=3.535523e+00,
+    k_IF=1.000000e+12,
+    p_V=1.000000e+02,
+    c_V=9.999857e+00,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=3.000000e-01,
+    c_F=1.000000e-03,
+    D_F=3.372329e-01,
+    a_F=1.000000e-12,
+    K_F=4.621079e+01,
+    delta_FV=1.000000e-02,
+    k_FV=1.004889e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)
+
+#16: M01
+Description: Null model (no IFN mechanisms)
+Calibrated parameters: 11 / 15
+Fixed (null): k_IF=∞, a_F=0, delta_FV=0, k_PV=∞
+----------------------------------------
+pars = TIVF5_2D.Params(;
+    beta=8.000000e-02,
+    k_E=4.027052e+00,
+    delta_I=3.547387e+00,
+    k_IF=1.000000e+12,
+    p_V=1.000000e+02,
+    c_V=1.000000e+01,
+    D_V=1.000000e-04,
+    k_PV=1.000000e+12,
+    p_F=3.000000e-01,
+    c_F=1.000535e-03,
+    D_F=2.459285e-01,
+    a_F=1.000000e-12,
+    K_F=5.262371e+01,
+    delta_FV=1.000000e-12,
+    k_FV=2.341880e+01,
+    eps_diff=1e-6,
+    delta_smooth=1e-6
+)

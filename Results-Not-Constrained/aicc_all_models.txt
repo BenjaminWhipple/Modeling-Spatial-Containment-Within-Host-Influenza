@@ -1,0 +1,73 @@
+====================================================================================================
+AICc Model Comparison Report
+Generated: 2026-03-28T14:44:45.467
+====================================================================================================
+
+Configuration:
+  Number of observations (n): 130
+    - Virus observations: 70
+    - IFN observations: 60
+    (Using Virus + IFN only)
+
+Mechanism Key:
+  BI = IFN blocks infection (k_IF)
+  BP = IFN blocks viral production (k_PV)
+  IC = IFN increases viral clearance (delta_FV)
+  PF = IFN positive feedback (a_F)
+
+Models included: 16
+  (All models)
+
+----------------------------------------------------------------------------------------------------
+Rank    Model   BI  BP  IC  PF           NLL         AIC        AICc       ΔAICc
+----------------------------------------------------------------------------------------------------
+   1    M09     ·   ·   ·   ·       24.0920     72.1840     74.8507      0.0000
+   2    M13     ·   ·   ·   ·       23.2230     72.4460     75.5839      0.7333
+   3    M10     ·   ·   ·   ·       25.2110     76.4220     79.5599      4.7093
+   4    M01     ·   ·   ·   ·       27.7010     77.4020     79.6393      4.7886
+   5    M03     ·   ·   ·   ·       27.1930     78.3860     81.0527      6.2020
+   6    M05     ·   ·   ·   ·       27.6860     79.3720     82.0387      7.1880
+   7    M11     ·   ·   ·   ·       26.5790     79.1580     82.2959      7.4453
+   8    M14     ·   ·   ·   ·       25.3780     78.7560     82.4082      7.5575
+   9    M02     ·   ·   ·   ·       27.9390     79.8780     82.5447      7.6940
+  10    M07     ·   ·   ·   ·       27.1850     80.3700     83.5079      8.6573
+  11    M12     ·   ·   ·   ·       26.1500     80.3000     83.9522      9.1015
+  12    M04     ·   ·   ·   ·       27.5220     81.0440     84.1819      9.3313
+  13    M16     ·   ·   ·   ·       25.0060     80.0120     84.2225      9.3719
+  14    M15     ·   ·   ·   ·       26.4810     80.9620     84.6142      9.7635
+  15    M06     ·   ·   ·   ·       27.9220     81.8440     84.9819     10.1313
+  16    M08     ·   ·   ·   ·       27.5140     83.0280     86.6802     11.8295
+----------------------------------------------------------------------------------------------------
+
+Interpretation Guide:
+  ΔAICc = 0-2:    Substantial support (essentially as good as best model)
+  ΔAICc = 2-4:    Strong support
+  ΔAICc = 4-7:    Considerably less support
+  ΔAICc = 7-10:   Essentially no support
+  ΔAICc > 10:     No support
+
+Akaike Weights (model probabilities):
+--------------------------------------------------
+  M09 : w = 0.4810  (cumulative: 0.4810)
+  M13 : w = 0.3334  (cumulative: 0.8143)
+  M10 : w = 0.0457  (cumulative: 0.8600)
+  M01 : w = 0.0439  (cumulative: 0.9039)
+  M03 : w = 0.0216  (cumulative: 0.9255)
+  M05 : w = 0.0132  (cumulative: 0.9388)
+  M11 : w = 0.0116  (cumulative: 0.9504)
+  M14 : w = 0.0110  (cumulative: 0.9614)
+  M02 : w = 0.0103  (cumulative: 0.9716)
+  M07 : w = 0.0063  (cumulative: 0.9780)
+  M12 : w = 0.0051  (cumulative: 0.9831)
+  M04 : w = 0.0045  (cumulative: 0.9876)
+  M16 : w = 0.0044  (cumulative: 0.9920)
+  M15 : w = 0.0036  (cumulative: 0.9957)
+  M06 : w = 0.0030  (cumulative: 0.9987)
+  M08 : w = 0.0013  (cumulative: 1.0000)
+--------------------------------------------------
+
+Best Model: M09
+  Mechanisms: 
+  Parameters: 12
+  NLL: 24.092
+  AICc: 74.85066666666667

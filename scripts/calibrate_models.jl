@@ -2,6 +2,7 @@
 Batch calibration script for TIVF5_2D model.
 Runs multiple calibration configurations with different fixed/free parameter combinations.
 """
+
 using Printf
 using LinearAlgebra
 using DifferentialEquations
@@ -711,6 +712,8 @@ function main(;
     abstol = TIVF5_2D.abstol(N)
     cb = positivity_callback_all(N; nfields=TIVF5_2D.nfields())
     
+    # Loss for requiring spatial containment.
+    #=
     loss = TIVF5_2D.make_tivf_gp_loss(prob, N;
         gp_path_V="src/data/gp_parameters/Toapanta_Virus_gp.npz",
         gp_path_F="src/data/gp_parameters/IFN_gp.npz",
@@ -726,6 +729,27 @@ function main(;
         max_final_infection=10.0,           # aggregate E1+E2+I at final time must be < 10
         clearance_penalty_weight=20.0       # strength of the clearance penalty
     )
+    =#
+    
+    # Default loss
+    ##=
+    loss = TIVF5_2D.make_tivf_gp_loss(prob, N;
+        gp_path_V="src/data/gp_parameters/Toapanta_Virus_gp.npz",
+        gp_path_F="src/data/gp_parameters/IFN_gp.npz",
+        abstol=abstol,
+        reltol=1e-4,
+        dtmax=0.05,
+        penalty=1e20,
+        params_in_log10=true,
+        callback=cb,
+        wF=1.0,
+        min_T_fraction=0.0,                 # at least 80% of T must remain at final time
+        infection_penalty_weight=0.0,      # strength of the penalty
+        max_final_infection=10.0,           # aggregate E1+E2+I at final time must be < 10
+        clearance_penalty_weight=0.0       # strength of the clearance penalty
+    )
+    
+
     
     # Default parameter vector (before fixing)
     θ_raw = [
@@ -813,7 +837,7 @@ end
 # Entry point
 if abspath(PROGRAM_FILE) == @__FILE__
     # Run only models M09–M16 (indices 9:16 in CONFIGS)
-    #results = main(; configs=CONFIGS[10:16], max_gens=100, stall_gens=20)
+    #results = main(; configs=CONFIGS[9:11], max_gens=100, stall_gens=20)
     
     # Alternative: run all configs
     results = main(; max_gens=100, stall_gens=20)

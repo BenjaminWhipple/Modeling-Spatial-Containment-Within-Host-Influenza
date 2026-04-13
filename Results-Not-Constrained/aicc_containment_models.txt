@@ -1,0 +1,49 @@
+====================================================================================================
+AICc Model Comparison Report
+Generated: 2026-03-28T14:44:45.505
+====================================================================================================
+
+Configuration:
+  Number of observations (n): 130
+    - Virus observations: 70
+    - IFN observations: 60
+    (Using Virus + IFN only)
+
+Mechanism Key:
+  BI = IFN blocks infection (k_IF)
+  BP = IFN blocks viral production (k_PV)
+  IC = IFN increases viral clearance (delta_FV)
+  PF = IFN positive feedback (a_F)
+
+Models included: 4
+  Subset: M11, M12, M15, M16
+
+----------------------------------------------------------------------------------------------------
+Rank    Model   BI  BP  IC  PF           NLL         AIC        AICc       ΔAICc
+----------------------------------------------------------------------------------------------------
+   1    M11     ·   ·   ·   ·       26.5790     79.1580     82.2959      0.0000
+   2    M12     ·   ·   ·   ·       26.1500     80.3000     83.9522      1.6562
+   3    M16     ·   ·   ·   ·       25.0060     80.0120     84.2225      1.9266
+   4    M15     ·   ·   ·   ·       26.4810     80.9620     84.6142      2.3182
+----------------------------------------------------------------------------------------------------
+
+Interpretation Guide:
+  ΔAICc = 0-2:    Substantial support (essentially as good as best model)
+  ΔAICc = 2-4:    Strong support
+  ΔAICc = 4-7:    Considerably less support
+  ΔAICc = 7-10:   Essentially no support
+  ΔAICc > 10:     No support
+
+Akaike Weights (model probabilities):
+--------------------------------------------------
+  M11 : w = 0.4690  (cumulative: 0.4690)
+  M12 : w = 0.2049  (cumulative: 0.6739)
+  M16 : w = 0.1790  (cumulative: 0.8529)
+  M15 : w = 0.1471  (cumulative: 1.0000)
+--------------------------------------------------
+
+Best Model: M11
+  Mechanisms: 
+  Parameters: 13
+  NLL: 26.579
+  AICc: 82.29593103448276

@@ -9,6 +9,7 @@ This script:
 4. Computes the marginal FIM (Schur complement) assuming D_V and D_F are known,
    and compares standard errors / identifiability with and without that assumption
 """
+
 using Printf
 using LinearAlgebra
 using NPZ

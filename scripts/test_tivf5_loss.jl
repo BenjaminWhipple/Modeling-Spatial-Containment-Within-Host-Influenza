@@ -85,6 +85,25 @@ function area_timeseries(sol, idxrng, tissue::BitVector, dA::Float64; thr::Float
     return A
 end
 
+function is_contained(sol, N::Int;
+                      min_T_fraction::Float64=0.80,
+                      max_final_infection::Float64=10.0)
+    idx_T  = 1:N
+    idx_E1 = (N+1):(2N)
+    idx_E2 = (2N+1):(3N)
+    idx_I  = (3N+1):(4N)
+
+    T_initial = sum(@view sol.u[1][idx_T])
+    T_final   = sum(@view sol.u[end][idx_T])
+    frac_remaining = T_final / max(T_initial, 1e-30)
+
+    aggregate_infected = sum(@view sol.u[end][idx_E1]) +
+                         sum(@view sol.u[end][idx_E2]) +
+                         sum(@view sol.u[end][idx_I])
+
+    return (frac_remaining >= min_T_fraction) && (aggregate_infected <= max_final_infection)
+end
+
 function main()
     isdir("Images") || mkpath("Images")
 
@@ -166,6 +185,8 @@ function main()
         saveat=t_eval, dense=false, save_everystep=false,
         callback=cb
     )
+
+    #println(is_contained(sol))
 
     println("Solve completed: ", sol.retcode)
 
