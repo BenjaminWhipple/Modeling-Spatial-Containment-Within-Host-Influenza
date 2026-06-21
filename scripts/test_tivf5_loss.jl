@@ -202,7 +202,7 @@ function main()
 
     kband = 1.0
     pV = plot(tV, muV_gp; ribbon=(kband .* σV_gp, kband .* σV_gp),
-              fillalpha=0.2, label="Virus GP μ±σ", xlabel="t", ylabel="log10(total V)")
+              fillalpha=0.2, label="Virus GP μ±σ", xlabel="t", ylabel="log10(total V)",xticks=0:2:10)
     plot!(pV, tV, yV_model; lw=2, label="Model")
     savefig(pV, "Images/tivf5_gpV_compare.png")
     println("Saved: Images/tivf5_gpV_compare.png")
@@ -215,7 +215,7 @@ function main()
     σF_gp  = sqrt.(max.(diag(loss.gpF.cov), 0.0))
 
     pF = plot(tF, muF_gp; ribbon=(kband .* σF_gp, kband .* σF_gp),
-              fillalpha=0.2, label="IFN GP μ±σ", xlabel="t", ylabel="log10(total F)")
+              fillalpha=0.2, label="IFN GP μ±σ", xlabel="t", ylabel="log10(total F)",xticks=0:2:10)
     plot!(pF, tF, yF_model; lw=2, label="Model")
     savefig(pF, "Images/tivf5_gpF_compare.png")
     println("Saved: Images/tivf5_gpF_compare.png")
@@ -247,7 +247,8 @@ function main()
         title="Aggregate State Trajectories",
         yscale=:log10,
         yticks=(yticks_vals, yticks_labs),
-        ylims=(1.0, 1e7)
+        ylims=(1.0, 1e7),
+        xticks=0:2:10
     )
     plot!(pAgg, t_eval, E1mass .+ 1.0; label="∫E1 dA")
     plot!(pAgg, t_eval, E2mass .+ 1.0; label="∫E2 dA")
@@ -271,7 +272,7 @@ function main()
     AV  = area_timeseries(sol, idx_V,  tissue, dA; thr=thr)
     AF  = area_timeseries(sol, idx_F,  tissue, dA; thr=thr)
 
-    pA = plot(sol.t, AT;  lw=2, label="T",  xlabel="t", ylabel="Area",
+    pA = plot(sol.t, AT;  lw=2, label="T",  xlabel="t", ylabel="Area",xticks=0:2:10,
               title="Spatial Extent")
     plot!(pA, sol.t, AE1; lw=2, label="E1")
     plot!(pA, sol.t, AE2; lw=2, label="E2")

@@ -37,9 +37,7 @@ using .TIVF5_2D
 
 include(joinpath(@__DIR__, "..", "src", "pde_utils.jl"))
 
-# ============================================================================
 # Parameter names (order matches θ vector used in set_params!)
-# ============================================================================
 const PARAM_NAMES = [
     "beta",      # 1  - infection rate
     "k_E",       # 2  - eclipse timing
@@ -60,9 +58,7 @@ const PARAM_NAMES = [
 
 const PARAM_INDEX = Dict(name => i for (i, name) in enumerate(PARAM_NAMES))
 
-# ============================================================================
 # Calibrated baseline parameters (from test_tivf5_loss.jl)
-# ============================================================================
 function calibrated_baseline()
     return [
         8.000000e-02,  # beta
@@ -83,9 +79,7 @@ function calibrated_baseline()
     ]
 end
 
-# ============================================================================
 # Containment detection
-# ============================================================================
 """
     is_contained(sol, N; min_T_fraction=0.80, max_final_infection=10.0, rtol=0.02) -> Bool
 
@@ -118,9 +112,7 @@ function is_contained(sol, N::Int;
            (aggregate_infected <= max_final_infection * (1.0 + rtol))
 end
 
-# ============================================================================
 # Simulation runner
-# ============================================================================
 """
 Run a single forward simulation and return (sol, contained::Bool).
 Returns (nothing, false) on solver failure.
@@ -152,9 +144,7 @@ function run_sim(θ::Vector{Float64}, prob, N::Int, cb;
     return (sol, contained)
 end
 
-# ============================================================================
 # OAT sweep
-# ============================================================================
 """
 One-at-a-time sweep for a single named parameter.
 
@@ -239,9 +229,7 @@ function oat_sweep(param_name::String, θ_base::Vector{Float64},
     return DataFrame(rows)
 end
 
-# ============================================================================
 # Pairwise sweep
-# ============================================================================
 """
 Helper: resolve a parameter name (possibly "DF_DV_ratio") to its log10 center
 and a function that applies a log10 value to a θ vector.
@@ -322,9 +310,7 @@ function pairwise_sweep(name1::String, name2::String,
     return DataFrame(rows)
 end
 
-# ============================================================================
 # Plotting helpers
-# ============================================================================
 """
 Line plot for OAT sweep showing containment (binary) vs log10(parameter).
 """
@@ -413,9 +399,6 @@ function plot_pairwise(df::DataFrame, name1::String, name2::String, output_dir::
     return p
 end
 
-# ============================================================================
-# Main
-# ============================================================================
 function main(;
               # ---- sweep configuration (easily modifiable) ----
               W::Float64  = 2.0,    # log10 half-width (±W decades)
@@ -430,9 +413,7 @@ function main(;
               #output_dir::String = "PostHocResults")
               output_dir::String = "PostHocResults-noclearance")
 
-    # ------------------------------------------------------------------
     # OAT parameters to sweep (add / remove entries here)
-    # ------------------------------------------------------------------
     oat_params = [
         "p_V",
         "p_F",
@@ -442,18 +423,17 @@ function main(;
         "DF_DV_ratio"   # relative magnitude of D_F / D_V
     ]
 
-    # ------------------------------------------------------------------
     # Pairwise parameter pairs to sweep (add / remove entries here)
     # All C(6,2) = 15 pairs of {p_V, p_F, a_F, K_F, k_PV, DF_DV_ratio}
-    # ------------------------------------------------------------------
     _pw_params = ["p_V", "p_F", "a_F", "K_F", "k_PV", "DF_DV_ratio"]
     pairwise_pairs = [(a, b) for i in eachindex(_pw_params)
                               for j in (i+1):length(_pw_params)
                               for (a, b) in ((_pw_params[i], _pw_params[j]),)]
 
-    # ------------------------------------------------------------------
+    # Quick modification to add this pair
+    push!(pairwise_pairs, ("D_F", "D_V"))
+
     # Setup
-    # ------------------------------------------------------------------
     isdir(output_dir) || mkpath(output_dir)
 
     θ_base = calibrated_baseline()
@@ -506,9 +486,7 @@ function main(;
 
     cb = positivity_callback_all(N; nfields=TIVF5_2D.nfields())
 
-    # ------------------------------------------------------------------
     # 1. OAT sweeps
-    # ------------------------------------------------------------------
     println("\n" * "=" ^ 70)
     println("ONE-AT-A-TIME SWEEPS")
     println("=" ^ 70)
@@ -527,9 +505,7 @@ function main(;
         plot_oat(df, param_name, output_dir; θ_base=θ_base)
     end
 
-    # ------------------------------------------------------------------
     # 2. Pairwise sweeps
-    # ------------------------------------------------------------------
     println("\n" * "=" ^ 70)
     println("PAIRWISE SWEEPS")
     println("=" ^ 70)
@@ -548,9 +524,7 @@ function main(;
         plot_pairwise(df, name1, name2, output_dir)
     end
 
-    # ------------------------------------------------------------------
     # Summary
-    # ------------------------------------------------------------------
     println("\n" * "=" ^ 70)
     println("SUMMARY")
     println("=" ^ 70)

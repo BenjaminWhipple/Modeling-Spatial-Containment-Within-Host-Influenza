@@ -673,7 +673,8 @@ function main(;
     
     nx, ny = 32, 32
     
-    # Default baseline parameters (before any fixing)
+    # Porous Diffusion Default baseline parameters (before any fixing)
+    #=
     pars = TIVF5_2D.Params(;
         beta=0.8,
         k_E=4.0,
@@ -687,6 +688,31 @@ function main(;
         c_F=0.01,
         D_F=1e-1,
         mF=1.0,
+        mV=1.0,
+        a_F=1000.0,
+        K_F=1e1,
+        delta_FV=0.001,
+        k_FV=1e2,
+        eps_diff=1e-6,
+        delta_smooth=1e-6
+    )
+    =#
+
+    # Linear Diffusion Parameters
+    pars = TIVF5_2D.Params(;
+        beta=0.8,
+        k_E=4.0,
+        delta_I=3.0,
+        k_IF=2.0,
+        p_V=10.0,
+        c_V=1.0,
+        D_V=1e-5,
+        k_PV=1.0,
+        p_F=0.03,
+        c_F=0.01,
+        D_F=1e-1,
+        mF=0.0,
+        mV=0.0,
         a_F=1000.0,
         K_F=1e1,
         delta_FV=0.001,
@@ -713,7 +739,6 @@ function main(;
     cb = positivity_callback_all(N; nfields=TIVF5_2D.nfields())
     
     # Loss for requiring spatial containment.
-    #=
     loss = TIVF5_2D.make_tivf_gp_loss(prob, N;
         gp_path_V="src/data/gp_parameters/Toapanta_Virus_gp.npz",
         gp_path_F="src/data/gp_parameters/IFN_gp.npz",
@@ -729,10 +754,9 @@ function main(;
         max_final_infection=10.0,           # aggregate E1+E2+I at final time must be < 10
         clearance_penalty_weight=20.0       # strength of the clearance penalty
     )
-    =#
     
     # Default loss
-    ##=
+    #=
     loss = TIVF5_2D.make_tivf_gp_loss(prob, N;
         gp_path_V="src/data/gp_parameters/Toapanta_Virus_gp.npz",
         gp_path_F="src/data/gp_parameters/IFN_gp.npz",
@@ -748,6 +772,7 @@ function main(;
         max_final_infection=10.0,           # aggregate E1+E2+I at final time must be < 10
         clearance_penalty_weight=0.0       # strength of the clearance penalty
     )
+    =#
     
 
     
@@ -837,10 +862,10 @@ end
 # Entry point
 if abspath(PROGRAM_FILE) == @__FILE__
     # Run only models M09–M16 (indices 9:16 in CONFIGS)
-    #results = main(; configs=CONFIGS[9:11], max_gens=100, stall_gens=20)
+    results = main(; configs=CONFIGS[9:16], max_gens=300, stall_gens=20)
     
     # Alternative: run all configs
-    results = main(; max_gens=100, stall_gens=20)
+    #results = main(; max_gens=100, stall_gens=20)
     
     # Alternative: run specific configs by name
     #results = run_configs(["M16"]; max_gens=100,stall_gens=20)
